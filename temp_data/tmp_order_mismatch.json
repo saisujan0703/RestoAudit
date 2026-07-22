@@ -1,0 +1,9 @@
+{
+  "user": { "userId": 1015 },
+  "branch": { "branchId": 101 },
+  "orderItems": [
+    { "menuItem": { "menuItemId": 1 }, "quantity": 1 }
+  ],
+  "orderStatus": "PLACED",
+  "orderTime": "2026-04-30T10:00:00"
+}

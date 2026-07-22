@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PROJECT_GUIDE.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="project-guide--sbms-frontend--backend">Project Guide — SBMS (Frontend + Backend)</h1>
+<p>This document explains the project structure, how CRUD works end-to-end, database connectivity, how to run the app, and includes a short VIVA-ready summary you can paste into your report.</p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li>Project overview</li>
+<li>Files to cite</li>
+<li>Frontend: API &amp; UI</li>
+<li>Backend: Controllers, Services, Repositories, Entities</li>
+<li>Database connectivity &amp; setup</li>
+<li>How a CRUD request flows (step-by-step)</li>
+<li>Run &amp; dev commands</li>
+<li>VIVA Q&amp;A (paste-ready answers)</li>
+<li>Troubleshooting &amp; notes</li>
+</ul>
+<hr>
+<h2 id="project-overview">Project overview</h2>
+<p>This is a two-tier application:</p>
+<ul>
+<li>Frontend: Next.js React app (UI + API helpers)</li>
+<li>Backend: Spring Boot REST API (controllers → services → repositories)</li>
+<li>Database: MySQL with JPA/Hibernate ORM mapping</li>
+</ul>
+<p>Frontend code calls a single API bridge module which contains the CRUD helpers; the backend exposes REST endpoints implemented as Spring controllers which use a service layer and JPA repositories to persist <code>@Entity</code> objects into MySQL.</p>
+<h2 id="key-files-to-cite-in-your-report">Key files to cite in your report</h2>
+<ul>
+<li>Frontend API bridge: <a href="frontend/lib/api.ts#L1">frontend/lib/api.ts</a></li>
+<li>Example frontend UI page (user management): <a href="frontend/app/admin/users/page.tsx#L1">frontend/app/admin/users/page.tsx</a></li>
+<li>Backend controllers (API endpoints):
+<ul>
+<li><a href="backend/src/main/java/com/restroaudit/backend/controller/UserController.java#L18">backend/src/main/java/com/restroaudit/backend/controller/UserController.java</a></li>
+<li><a href="backend/src/main/java/com/restroaudit/backend/controller/OrderController.java#L11">backend/src/main/java/com/restroaudit/backend/controller/OrderController.java</a></li>
+<li><a href="backend/src/main/java/com/restroaudit/backend/controller/MenuItemController.java#L9">backend/src/main/java/com/restroaudit/backend/controller/MenuItemController.java</a></li>
+</ul>
+</li>
+<li>Backend service example: <a href="backend/src/main/java/com/restroaudit/backend/service/UserService.java#L9">backend/src/main/java/com/restroaudit/backend/service/UserService.java</a></li>
+<li>Repository example: <a href="backend/src/main/java/com/restroaudit/backend/repository/UserRepository.java#L6">backend/src/main/java/com/restroaudit/backend/repository/UserRepository.java</a></li>
+<li>Entity folder: <a href="backend/src/main/java/com/restroaudit/backend/model">backend/src/main/java/com/restroaudit/backend/model</a></li>
+<li>DB config: <a href="backend/src/main/resources/application.properties#L1">backend/src/main/resources/application.properties</a></li>
+</ul>
+<h2 id="frontend--api--ui">Frontend — API &amp; UI</h2>
+<p>Main API helper: <code>frontend/lib/api.ts</code> centralizes <code>fetch()</code> calls and exposes functions such as:</p>
+<ul>
+<li><code>fetchUsers()</code>, <code>registerUser()</code> — user CRUD</li>
+<li><code>fetchOrders()</code>, <code>createOrder()</code>, <code>updateOrder()</code> — order flow</li>
+<li><code>fetchMenuItems()</code>, <code>deleteMenuItem()</code> — menu item CRUD</li>
+</ul>
+<p>This file ensures all requests use JSON and forwards a branch header when available:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// example call</span>
+<span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/users`</span>, { <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>, <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(payload) })
+</div></code></pre>
+<p>UI pages import these helpers. Example: the admin users page (<code>frontend/app/admin/users/page.tsx</code>) calls <code>fetchUsers()</code> on mount and <code>registerUser()</code> when creating.</p>
+<p>Why include only <code>lib/api.ts</code> in the report? It neatly demonstrates how the frontend calls the backend for all CRUD operations.</p>
+<h2 id="backend--controllers-services-repositories-entities">Backend — Controllers, Services, Repositories, Entities</h2>
+<p>Pattern used throughout the backend:</p>
+<ol>
+<li>
+<p>Controller — annotated with <code>@RestController</code> and <code>@RequestMapping(&quot;/api/...&quot;)</code>. Defines endpoints using <code>@GetMapping</code>, <code>@PostMapping</code>, <code>@PutMapping</code>, <code>@DeleteMapping</code>.</p>
+<ul>
+<li>Example: <code>UserController</code> maps <code>/api/users</code> and implements the full CRUD surface.</li>
+</ul>
+</li>
+<li>
+<p>Service — annotated with <code>@Service</code>. Encapsulates business logic and transactional operations. Example: <code>OrderService</code> performs validation, saves the order, updates loyalty points and updates ingredient stock.</p>
+</li>
+<li>
+<p>Repository — extends <code>JpaRepository&lt;Entity, IdType&gt;</code>. Provides <code>save()</code>, <code>findById()</code>, <code>findAll()</code>, <code>deleteById()</code>.</p>
+</li>
+<li>
+<p>Entity — annotated with <code>@Entity</code> and <code>@Table(name = &quot;...&quot;)</code>. Fields use <code>@Column</code>, relationships use <code>@ManyToOne</code> / <code>@OneToMany</code> and <code>@JoinColumn</code>.</p>
+</li>
+</ol>
+<p>Files: see the key file list above. The <code>model</code> folder currently contains 10 <code>@Entity</code> classes (User, Order, OrderDetail, MenuItem, Ingredient, Feedback, Department, Branch, AuditLog, ComplaintLog).</p>
+<p>Note about missing tables: if your DB has more tables (e.g., <code>recipe</code>), some are used as lookup or mapping tables and may be accessed via <code>JdbcTemplate</code> (see <code>OrderService</code>) instead of an <code>@Entity</code>.</p>
+<h2 id="database-connectivity--setup">Database connectivity &amp; setup</h2>
+<p>The connection is configured in <code>backend/src/main/resources/application.properties</code>:</p>
+<pre class="hljs"><code><div><span class="hljs-attr">spring.datasource.url</span>=<span class="hljs-string">jdbc:mysql://localhost:3306/food_quality_db</span>
+<span class="hljs-attr">spring.datasource.username</span>=<span class="hljs-string">root</span>
+<span class="hljs-attr">spring.datasource.password</span>=<span class="hljs-string">&lt;your-db-password&gt;</span>
+<span class="hljs-attr">spring.jpa.hibernate.ddl-auto</span>=<span class="hljs-string">update</span>
+<span class="hljs-attr">spring.jpa.show-sql</span>=<span class="hljs-string">true</span>
+</div></code></pre>
+<p>Quick SQL to create the database (run in MySQL):</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">CREATE</span> DATABASE IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> food_quality_db <span class="hljs-keyword">CHARACTER SET</span> utf8mb4 <span class="hljs-keyword">COLLATE</span> utf8mb4_unicode_ci;
+<span class="hljs-comment">-- create a user (optional)</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;sbms_user&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;secure_password&#x27;</span>;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> <span class="hljs-keyword">ON</span> food_quality_db.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;sbms_user&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;
+FLUSH PRIVILEGES;
+</div></code></pre>
+<p>Replace credentials in <code>application.properties</code>. For production, avoid plaintext credentials — use environment variables or a secrets manager.</p>
+<h2 id="how-a-crud-request-flows-step-by-step">How a CRUD request flows (step-by-step)</h2>
+<p>Example: Create user</p>
+<ol>
+<li>Frontend: <code>registerUser(payload)</code> in <code>frontend/lib/api.ts</code> sends POST <code>/api/users</code> with JSON body.</li>
+<li>Backend controller: <code>UserController.create(@RequestBody User entity)</code> receives the request; Spring MVC deserializes JSON into <code>User</code> object.</li>
+<li>Controller calls <code>userService.save(entity)</code>.</li>
+<li>Service: <code>UserService.save()</code> may validate and then call <code>userRepository.save(entity)</code>.</li>
+<li>Repository (JPA/Hibernate) converts entity → SQL <code>INSERT</code> and persists into <code>users</code> table.</li>
+<li>Controller returns a DTO or map (flattened fields) to the frontend.</li>
+</ol>
+<h2 id="run--dev-commands">Run &amp; dev commands</h2>
+<p>Backend (Maven):</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> backend
+mvn spring-boot:run
+</div></code></pre>
+<p>Frontend (pnpm / npm):</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> frontend
+pnpm install
+pnpm dev
+<span class="hljs-comment"># or</span>
+npm install
+npm run dev
+</div></code></pre>
+<p>Open the frontend at <code>http://localhost:3000</code> (default for Next.js) and backend at <code>http://localhost:8080</code>.</p>
+<h2 id="api-endpoints-quick-list">API endpoints (quick list)</h2>
+<ul>
+<li><code>GET  /api/users</code> — list users</li>
+<li><code>GET  /api/users/{id}</code> — get user</li>
+<li><code>POST /api/users</code> — create user</li>
+<li><code>PUT  /api/users/{id}</code> — update user</li>
+<li><code>DELETE /api/users/{id}</code> — delete user</li>
+</ul>
+<p>Same patterns exist for <code>/api/orders</code>, <code>/api/menu-items</code>, <code>/api/ingredients</code>, <code>/api/feedbacks</code>, <code>/api/complaint-logs</code>, etc. See controllers in <code>backend/src/main/java/com/restroaudit/backend/controller</code>.</p>
+<h2 id="viva-ready-qa-short-paste-ready-answers">VIVA-ready Q&amp;A (short paste-ready answers)</h2>
+<ul>
+<li>What is ORM? — Object Relational Mapping maps Java classes (<code>@Entity</code>) to DB tables; JPA/Hibernate generates SQL automatically.</li>
+<li>How are endpoints defined? — In controllers via <code>@RestController</code> with <code>@GetMapping/@PostMapping</code> etc.; controllers call services which call repositories.</li>
+<li>Where is DB configured? — <code>backend/src/main/resources/application.properties</code> (contains <code>spring.datasource.url</code>, user, password).</li>
+<li>How does frontend send branch-scoped requests? — <code>lib/api.ts</code> reads <code>restroaudit.currentUser</code> from <code>localStorage</code> and sends <code>X-Branch-Id</code> header.</li>
+</ul>
+<h2 id="troubleshooting--tips">Troubleshooting / Tips</h2>
+<ul>
+<li>If backend can't connect to DB: check credentials in <code>application.properties</code>, ensure MySQL is running and database exists.</li>
+<li>To see SQL statements: <code>spring.jpa.show-sql=true</code> is already enabled.</li>
+<li>If you add a new DB table and want JPA to manage it: create an <code>@Entity</code> and repository; restart the app.</li>
+</ul>
+<h2 id="where-to-edit-if-you-want-to-add-a-feature">Where to edit if you want to add a feature</h2>
+<ul>
+<li>New endpoint → create controller method in appropriate controller or new controller under <code>backend/.../controller</code>.</li>
+<li>Business logic → add to a <code>@Service</code> or update existing service.</li>
+<li>Persisted model → add <code>@Entity</code> under <code>backend/.../model</code> and a <code>JpaRepository</code>.</li>
+<li>Frontend usage → add a helper in <code>frontend/lib/api.ts</code> and call it from a page under <code>frontend/app</code>.</li>
+</ul>
+<hr>
+<p>If you'd like, I can: (pick one)</p>
+<ul>
+<li>also commit a short <code>README.md</code> at repo root summarizing these steps, or</li>
+<li>redact the DB password in <code>application.properties</code> and replace with an environment-variable example.</li>
+</ul>
+<p>File created: <code>docs/PROJECT_GUIDE.md</code></p>
+
+</body>
+</html>

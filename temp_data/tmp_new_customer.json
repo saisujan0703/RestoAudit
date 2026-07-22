@@ -1,0 +1,7 @@
+{
+  "firstName": "Test",
+  "lastName": "OtherBranch",
+  "email": "test.other@example.com",
+  "userRole": "Customer",
+  "branch": { "branchId": 102 }
+}

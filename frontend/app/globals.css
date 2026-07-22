@@ -1,0 +1,306 @@
+/* ─── Restro Audit — Olive Garden Design System ─── */
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ══ PALETTE TOKENS ══════════════════════════════════
+   Parchment  #F5F0E8   Sand      #C9B99A
+   Olive      #A8C5A0   Sage      #7A9E7E
+   Bark       #6B5E4E   Olivewood #2D3A2E
+═══════════════════════════════════════════════════ */
+:root {
+  --parchment: #F5F0E8;
+  --sand:      #C9B99A;
+  --olive:     #A8C5A0;
+  --sage:      #7A9E7E;
+  --bark:      #6B5E4E;
+  --olivewood: #2D3A2E;
+
+  --bg-primary:   #F5F0E8;
+  --bg-surface:   rgba(255,253,248,0.88);
+  --bg-elevated:  #EDE7D5;
+  --bg-hover:     #E4DBCA;
+
+  --text-1:     #2D3A2E;
+  --text-2:     #4A5E4B;
+  --text-muted: #8A7E6A;
+
+  --accent-primary:       #7A9E7E;
+  --accent-primary-hover: #5E856A;
+  --accent-primary-dim:   rgba(122,158,126,0.14);
+  --accent-primary-glow:  rgba(122,158,126,0.25);
+  --accent-sand:  #C9B99A;
+  --accent-olive: #A8C5A0;
+  --accent-bark:  #6B5E4E;
+
+  --border-subtle: rgba(107,94,78,0.14);
+  --border-medium: rgba(107,94,78,0.28);
+
+  --status-good:    #4A8052;
+  --status-good-bg: rgba(74,128,82,0.10);
+  --status-bad:     #9B4A2A;
+  --status-bad-bg:  rgba(155,74,42,0.09);
+  --status-warn:    #A07820;
+  --status-warn-bg: rgba(160,120,32,0.09);
+
+  /* shadcn compat */
+  --background: #F5F0E8; --foreground: #2D3A2E;
+  --card: rgba(255,253,248,0.85); --card-foreground: #2D3A2E;
+  --popover: #FDFAF2; --popover-foreground: #2D3A2E;
+  --primary: #7A9E7E; --primary-foreground: #F5F0E8;
+  --secondary: #EDE7D5; --secondary-foreground: #2D3A2E;
+  --muted: #EDE7D5; --muted-foreground: #8A7E6A;
+  --accent: #A8C5A0; --accent-foreground: #2D3A2E;
+  --destructive: #9B4A2A; --destructive-foreground: #F5F0E8;
+  --border: rgba(107,94,78,0.14); --input: rgba(107,94,78,0.14);
+  --ring: #7A9E7E; --radius: 0.875rem;
+  --chart-1:#7A9E7E; --chart-2:#A8C5A0; --chart-3:#C9B99A; --chart-4:#6B5E4E; --chart-5:#2D3A2E;
+  --sidebar: #2D3A2E; --sidebar-foreground: #F5F0E8;
+  --sidebar-primary: #A8C5A0; --sidebar-primary-foreground: #2D3A2E;
+  --sidebar-accent: rgba(168,197,160,0.15); --sidebar-accent-foreground: #A8C5A0;
+  --sidebar-border: rgba(245,240,232,0.08); --sidebar-ring: #7A9E7E;
+
+  /* Aurora cursor tracking — set by JS */
+  --mx: 50%;
+  --my: 50%;
+}
+
+.hero-gradient-text {
+  background-image: linear-gradient(135deg, var(--olivewood), var(--sage) 45%, var(--olive) 70%, var(--sand));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+@theme inline {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:  'Jost', system-ui, sans-serif;
+  --color-background: var(--background); --color-foreground: var(--foreground);
+  --color-card: var(--card); --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover); --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive); --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1); --color-chart-2: var(--chart-2); --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4); --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px); --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius); --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar); --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary); --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent); --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border); --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ══ BASE ═══════════════════════════════════════════ */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    color: #2D3A2E;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  body {
+    /*
+     * ONE seamless flowing gradient — sage green (top) → parchment (mid) → sand → olivewood (bottom).
+     * background-attachment: fixed keeps it pinned as you scroll, so colours flow
+     * continuously across the whole page like the reference purple gradient.
+     */
+    background:
+      linear-gradient(
+        160deg,
+        #B8D4B4 0%,
+        #C8DEC6 12%,
+        #D8EBD5 22%,
+        #E8F2E8 30%,
+        #EFF6EE 38%,
+        #F5F0E8 50%,
+        #EDE7D5 65%,
+        #E4DBCA 78%,
+        #3D4E3E 93%,
+        #2D3A2E 100%
+      ) !important;
+    background-attachment: fixed !important;
+    color: #2D3A2E;
+    font-family: 'Jost', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+  h1,h2,h3,h4,h5,h6 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: #2D3A2E;
+  }
+}
+
+/* ══ AURORA CURSOR TRACKING ═════════════════════════
+   Three transparent orbs that follow the cursor.
+   They float OVER the fixed body gradient, adding
+   warmth/coolness around the cursor position.
+═══════════════════════════════════════════════════ */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  will-change: background-image;
+  /* NO background-color here — body gradient shows through */
+  background-image:
+    radial-gradient(
+      900px 700px at var(--mx, 50%) var(--my, 50%),
+      rgba(122,158,126,0.22) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      700px 520px at calc(var(--mx, 50%) * 0.55 + 22%) calc(var(--my, 50%) * 0.6 + 8%),
+      rgba(201,185,154,0.18) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      620px 460px at calc(100% - var(--mx, 50%) * 0.5) calc(100% - var(--my, 50%) * 0.45),
+      rgba(168,197,160,0.15) 0%,
+      transparent 60%
+    );
+  transition: background-image 0.06s linear;
+}
+
+/* ══ SECTION TINTS — all transparent now ════════════
+   Sections are transparent; the body fixed gradient
+   creates the seamless colour flow underneath.
+   data-section can still exist for JS hooks but
+   no longer override the background colour.
+═══════════════════════════════════════════════════ */
+[data-section] { background: transparent !important; }
+
+/* ══ GRAIN TEXTURE ═══════════════════════════════════ */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px;
+  opacity: 0.042;
+  mix-blend-mode: multiply;
+}
+
+/* ══ GLASS CARDS ════════════════════════════════════ */
+.glass-card {
+  background: rgba(255,253,248,0.72);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,0.65);
+  box-shadow: 0 4px 24px rgba(45,58,46,0.07), 0 1px 4px rgba(45,58,46,0.04);
+}
+.glass-card-dark {
+  background: rgba(45,58,46,0.58);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(168,197,160,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+}
+
+/* ══ GRADIENT PRESETS ═══════════════════════════════ */
+.grad-hero {
+  background:
+    radial-gradient(ellipse 80% 70% at 85% 15%, rgba(122,158,126,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 10% 80%, rgba(168,197,160,0.28) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 55% 50%, rgba(201,185,154,0.18) 0%, transparent 50%),
+    #F5F0E8;
+}
+.grad-sand {
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 30%, rgba(201,185,154,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 70%, rgba(168,197,160,0.25) 0%, transparent 55%),
+    #EDE7D5;
+}
+.grad-olive {
+  background:
+    radial-gradient(ellipse 75% 65% at 80% 20%, rgba(122,158,126,0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 65% 55% at 20% 75%, rgba(168,197,160,0.4) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(201,185,154,0.15) 0%, transparent 50%),
+    #B8D4B4;
+}
+.grad-dark {
+  background:
+    radial-gradient(ellipse 70% 60% at 20% 20%, rgba(74,128,82,0.4) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(122,158,126,0.25) 0%, transparent 50%),
+    #2D3A2E;
+}
+
+/* ══ PATTERN OVERLAYS ════════════════════════════════ */
+.pattern-dots {
+  background-image: radial-gradient(circle, rgba(122,158,126,0.18) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.pattern-grid {
+  background-image:
+    linear-gradient(rgba(107,94,78,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107,94,78,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.pattern-diagonal {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(107,94,78,0.04) 0, rgba(107,94,78,0.04) 1px,
+    transparent 1px, transparent 16px
+  );
+}
+.pattern-diagonal-light {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(245,240,232,0.05) 0, rgba(245,240,232,0.05) 1px,
+    transparent 1px, transparent 16px
+  );
+}
+
+/* ══ TYPOGRAPHY ══════════════════════════════════════ */
+.font-serif { font-family: 'Cormorant Garamond', Georgia, serif !important; }
+.font-sans  { font-family: 'Jost', system-ui, sans-serif !important; }
+
+/* ══ ANIMATIONS ══════════════════════════════════════ */
+@keyframes spin  { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50%     { transform: translateY(-8px); }
+}
+@keyframes aurora-drift {
+  0%   { transform: translate(0,0) scale(1); }
+  33%  { transform: translate(18px,-12px) scale(1.02); }
+  66%  { transform: translate(-8px,10px) scale(0.98); }
+  100% { transform: translate(0,0) scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.animate-float  { animation: float 6s ease-in-out infinite; }
+.animate-aurora { animation: aurora-drift 14s ease-in-out infinite; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite linear;
+}
+
+/* ══ SCROLLBAR ════════════════════════════════════════ */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: #EDE7D5; }
+::-webkit-scrollbar-thumb { background: #C9B99A; border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: #6B5E4E; }

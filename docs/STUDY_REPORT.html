@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>STUDY_REPORT.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="study-report--sbms-for-examviva-study">Study Report — SBMS (For exam/viva study)</h1>
+<p>Purpose: a concise, exam-friendly summary of the codebase, where CRUD logic lives, how data flows end-to-end, and short, paste-ready answers for viva prep.</p>
+<h2 id="1-quick-project-map">1. Quick project map</h2>
+<ul>
+<li>Root: utility scripts and SQL files (e.g., <code>populate_db.sql</code>, <code>setup_audit.sql</code>).</li>
+<li><code>backend/</code> — Spring Boot app (Maven): controllers, services, repositories, entities, <code>application.properties</code>.</li>
+<li><code>frontend/</code> — Next.js app (app router): <code>lib/api.ts</code> (API bridge), <code>app/</code> pages, <code>components/</code> UI.</li>
+<li><code>docs/</code> — guides and reports (this file and <code>PROJECT_GUIDE.md</code>).</li>
+</ul>
+<h2 id="2-core-files-to-study-start-here">2. Core files to study (start here)</h2>
+<ul>
+<li><code>frontend/lib/api.ts</code> — central API bridge: all frontend CRUD calls.</li>
+<li><code>frontend/app/admin/users/page.tsx</code> — representative admin UI using the API bridge.</li>
+<li><code>backend/src/main/java/com/restroaudit/backend/controller/UserController.java</code> — CRUD endpoints for users.</li>
+<li><code>backend/src/main/java/com/restroaudit/backend/service/OrderService.java</code> — complex business logic and transactions.</li>
+<li><code>backend/src/main/resources/application.properties</code> — DB connection and JPA config.</li>
+</ul>
+<h2 id="3-frontend-what-to-read-and-why">3. Frontend: what to read and why</h2>
+<ul>
+<li><code>lib/api.ts</code>: shows <code>requestJson()</code> helper and exported functions like <code>fetchUsers()</code>, <code>registerUser()</code>, <code>createOrder()</code>; studying this shows how headers, JSON body, and error handling are handled.</li>
+</ul>
+<p>Representative snippet (conceptual):</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> requestJson&lt;T&gt;(<span class="hljs-attr">path</span>:<span class="hljs-built_in">string</span>, <span class="hljs-attr">init</span>?: <span class="hljs-title class_">RequestInit</span>){
+  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_URL}</span><span class="hljs-subst">${path}</span>`</span>, { ...init, <span class="hljs-attr">headers</span>: { <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>, ...(init?.<span class="hljs-property">headers</span>||{}) }});
+  <span class="hljs-keyword">if</span>(!res.<span class="hljs-property">ok</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-keyword">await</span> res.<span class="hljs-title function_">text</span>());
+  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">json</span>() <span class="hljs-keyword">as</span> <span class="hljs-title class_">Promise</span>&lt;T&gt;;
+}
+</div></code></pre>
+<p>Tips: trace one flow end-to-end (e.g., create user) by following a page's handler → <code>lib/api.ts</code> → network call.</p>
+<h2 id="4-backend-controllers--services--repositories">4. Backend: controllers → services → repositories</h2>
+<ul>
+<li>Controllers: translate HTTP requests to Java objects and call services. Look for <code>@RestController</code> and mappings like <code>@PostMapping(&quot;/api/users&quot;)</code>.</li>
+<li>Services: contain business rules and <code>@Transactional</code> methods (important for order creation that updates stock and loyalty points).</li>
+<li>Repositories: <code>interface UserRepository extends JpaRepository&lt;User, Long&gt;</code> provides persistence.</li>
+</ul>
+<p>Representative Controller snippet (conceptual):</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@PostMapping(&quot;/api/users&quot;)</span>
+<span class="hljs-keyword">public</span> ResponseEntity&lt;?&gt; createUser(<span class="hljs-meta">@RequestBody</span> User u){
+  <span class="hljs-type">User</span> <span class="hljs-variable">saved</span> <span class="hljs-operator">=</span> userService.save(u);
+  <span class="hljs-keyword">return</span> ResponseEntity.ok(saved);
+}
+</div></code></pre>
+<p>Representative Service snippet (conceptual):</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Transactional</span>
+<span class="hljs-keyword">public</span> Order <span class="hljs-title function_">saveOrder</span><span class="hljs-params">(Order order)</span>{
+  <span class="hljs-comment">// validate, persist order, update ingredients via recipe lookups, update loyalty</span>
+  orderRepository.save(order);
+  <span class="hljs-keyword">return</span> order;
+}
+</div></code></pre>
+<h2 id="5-database-notes">5. Database notes</h2>
+<ul>
+<li>Config: <code>backend/src/main/resources/application.properties</code></li>
+</ul>
+<p>Example properties (dev):</p>
+<pre class="hljs"><code><div><span class="hljs-attr">spring.datasource.url</span>=<span class="hljs-string">jdbc:mysql://localhost:3306/food_quality_db</span>
+<span class="hljs-attr">spring.datasource.username</span>=<span class="hljs-string">root</span>
+<span class="hljs-attr">spring.datasource.password</span>=<span class="hljs-string">&lt;redact-for-report&gt;</span>
+<span class="hljs-attr">spring.jpa.hibernate.ddl-auto</span>=<span class="hljs-string">update</span>
+<span class="hljs-attr">spring.jpa.show-sql</span>=<span class="hljs-string">true</span>
+</div></code></pre>
+<p>Security note: do NOT include plaintext passwords in reports — replace with <code>DB_PASSWORD</code> environment variable in instructions.</p>
+<h2 id="6-end-to-end-flow-create-order--step-by-step">6. End-to-end flow (Create Order) — step-by-step</h2>
+<ol>
+<li>User clicks confirm order in frontend UI → page calls <code>createOrder(payload)</code> from <code>lib/api.ts</code>.</li>
+<li><code>lib/api.ts</code> sends POST <code>/api/orders</code> with JSON and headers (including <code>X-Branch-Id</code>).</li>
+<li>Spring controller receives JSON and maps to <code>Order</code> or DTO.</li>
+<li>Controller calls <code>OrderService.saveOrder(orderDto)</code>.</li>
+<li><code>OrderService</code> runs transactional logic: validates items, looks up recipes/ingredients (uses <code>JdbcTemplate</code> for some lookups), saves <code>Order</code> &amp; <code>OrderDetail</code> via repositories, deducts ingredient stock, increments loyalty points.</li>
+<li>Database commit occurs at end of transaction; controller returns created order.</li>
+<li>Frontend receives success, updates UI.</li>
+</ol>
+<p>Key concepts to remember for viva: transactions (<code>@Transactional</code>), DTO vs Entity mapping, repository patterns, and error handling propagation back to the UI.</p>
+<h2 id="7-paste-ready-viva-answers">7. Paste-ready viva answers</h2>
+<ul>
+<li>Q: How do you implement CRUD? — Frontend uses a single API bridge (<code>lib/api.ts</code>) that wraps <code>fetch</code>; backend exposes REST controllers that call services which use <code>JpaRepository</code> to persist entities.</li>
+<li>Q: How is consistency ensured when creating an order that affects stock? — <code>OrderService</code> runs in a <code>@Transactional</code> method so all DB updates (order + stock changes) commit or rollback together.</li>
+<li>Q: How are some lookup tables accessed? — Frequently-read lookup tables (e.g., <code>recipe</code>) may be accessed with <code>JdbcTemplate</code> when not modelled as an <code>@Entity</code>.</li>
+</ul>
+<h2 id="8-run--dev-commands-copyable">8. Run &amp; dev commands (copyable)</h2>
+<p>Backend:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> backend
+mvn spring-boot:run
+</div></code></pre>
+<p>Frontend:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> frontend
+pnpm install
+pnpm dev
+<span class="hljs-comment"># or</span>
+npm install
+npm run dev
+</div></code></pre>
+<h2 id="9-short-study-checklist">9. Short study checklist</h2>
+<ul>
+<li>Read <code>frontend/lib/api.ts</code> and one page that uses it.</li>
+<li>Read <code>UserController</code> and <code>OrderService</code> (focus on transaction boundaries).</li>
+<li>Open <code>backend/src/main/resources/application.properties</code> and make sure you understand DB config.</li>
+<li>Run backend + frontend locally and do one create/read/update/delete to observe flows.</li>
+</ul>
+<hr>
+<p>If you want, I can now:</p>
+<ul>
+<li>redact the DB password in <code>application.properties</code> and add an env-var example, or</li>
+<li>create a short <code>one-page cheat sheet</code> PDF from this markdown.</li>
+</ul>
+<p>File created: <code>docs/STUDY_REPORT.md</code></p>
+
+</body>
+</html>

@@ -1,0 +1,1495 @@
+           FOOD QUALITY MONITORING SYSTEM
+ 21CSC205P Database Management Systems  
+A MINI PROJECT REPORT 
+ 
+Submitted by 
+ 
+NIKHIL KARUR
+[RA241100301156] 
+ MALEPATI SAI SUJAN BALAJI
+[RA2411003011591] 
+ 
+Under the Guidance of 
+ 
+Arnab Maity
+ 
+(
+Assistant Professor, Computing Technologies
+) 
+ 
+ 
+                        in partial fulfillment of the requirements
+ 
+for the degree 
+of 
+ 
+    BACHELOR OF TECHNOLOGY 
+in 
+     COMPUTER SCIENCE ENGINEERING  
+ 
+ 
+ 
+DEPARTMENT OF COMPUTING TECHNOLOGIES
+COLLEGE OF ENGINEERING AND TECHNOLOGY
+SRM INSTITUTE OF SCIENCE AND TECHNOLOGY
+KATTANKULATHUR- 603 203
+MAY 2026
+ 
+ 
+ 
+ 
+        SRM INSTITUTE OF SCIENCE AND 
+TECHNOLOGY KATTANKULATHUR – 603 203 
+ 
+BONAFIDE CERTIFICATE 
+ 
+ 
+ 
+Certified that Project report titled “
+FOOD QUALITY MONITORING SYSTEM
+” is the bonafide work of “
+NIKHIL KARUR [RA2411003011564], SAI SUJAN BALAJI [RA2411003011591]” 
+who carried out the
+ 21CSC205P Database Management Systems 
+mini project work under my supervision.
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Arnab Maity                                                                      HEAD OF THE DEPARMENT 
+Assistant Professor
+ 
+PROFESSOR AND HEAD 
+Department of Computing Technologies
+ 
+Department 
+ 
+    
+    
+                                                                   
+      
+ 
+           
+ 
+ 
+ 
+               
+ 
+ 
+ABSTRACT 
+The increasing competition in the restaurant industry has made maintaining food quality and customer satisfaction more important than ever. Efficient collection, management, and analysis of customer feedback is essential for improving service standards and ensuring consistent quality. This project, titled 
+“Food Quality Monitoring System in Restaurants (Customer Feedback Loop)”
+, presents the design and implementation of a relational database system to effectively manage customer feedback and quality assessment processes.
+The system is developed using Entity-Relationship (ER) modeling to identify key entities such as customers, restaurants, menu items, orders, feedback, ratings, staff, and quality parameters. Relationships among these entities are clearly defined with appropriate cardinalities, primary keys, and foreign keys to maintain data integrity and consistency. Dependent entities such as feedback details and order items are modeled carefully using composite keys where necessary to represent their relationships accurately. The ER model is further transformed into a relational schema, and the database is implemented using MySQL with Data Definition Language (DDL) and Data Manipulation Language (DML) commands.
+To improve system efficiency and scalability, customer reviews and related multimedia files (if any) are stored externally, while only essential metadata and references are maintained within the database. The system also incorporates role-based access control to manage different user roles such as Admin, Restaurant Manager, Staff, and Customer, ensuring secure and controlled access to data.
+The proposed database design ensures data consistency, reduces redundancy through normalization, supports efficient query processing, and enables effective monitoring of food quality trends. By converting raw customer feedback into structured and actionable insights, the system provides a reliable foundation for continuous quality improvement in restaurants. This project demonstrates the practical application of DBMS concepts including ER modeling, relational schema design, normalization, SQL implementation, and feedback data analysis.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TABLE OF CONTENTS 
+ 
+Chapter No. 
+Title 
+Page no. 
+ 
+ABSTRACT 
+ 
+1 
+Problem understanding, Identification of Entity and Relationships, 
+Construction of DB using ER Model for their project 
+ 
+2 
+Design of Relational Schemas, Creation of Database and Tables for their project 
+ 
+3 
+3.1Writing queries based on the concepts of Aggregate functions, 
+constraints, sets 
+ 
+3.2 Writing complex queries based on subqueries, joins and views 
+ 
+3.3 Writing complex queries based on the concepts of functions, 
+Triggers, Cursors and Exception Handling 
+ 
+4 
+4.1 Analysing the pitfalls, identifying the dependencies, and applying 
+Normalizations- 1NF, 2NF, 3NF
+ 
+ 
+4.2 Analysing the pitfalls, identifying the dependencies, and applying 
+Normalizations- 4NF, 5NF
+ 
+ 
+5 
+ Implementation of concurrency control and recovery mechanisms.   
+ 
+6 
+Front-end And Back-End Implementation code  
+ 
+7 
+Results and Discussions 
+ 
+ 
+ 
+ 
+ 
+ 
+LIST OF FIGURES 
+ 
+ 
+ 
+Figure No. 
+Name 
+Page no. 
+1.1
+ 
+ER diagram of Food Quality Monitoring in Restaurents
+ 
+2.1 
+Relational Schema for Food Quality Monitoring in Restaurents
+ 
+3 
+ 
+ 
+4 
+ 
+ 
+5 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LIST OF TABLES 
+ 
+ 
+ 
+ 
+Figure No. 
+Name 
+Page no. 
+1 
+USER
+ 
+2 
+DEPARTMENT 
+ 
+3 
+BRANCH
+ 
+ 
+4 
+CUSTOMER_PROFILE
+ 
+ 
+5 
+ORDER
+ 
+6 
+ORDER_DETAILS
+ 
+ 
+7 
+MENU_ITEM  
+ 
+8 
+PAYMENT  
+ 
+9 
+FEEDBACK  
+ 
+ 
+10 
+COMPLAINT_LOG
+ 
+ 
+11
+INGREDIENT
+12
+RECIPE
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CHAPTER 1 
+ 
+PROBLEM UNDERSTANDING, IDENTIFICATION OF 
+ENTITY AND RELATIONSHIPS, CONSTRUCTION OF DB 
+USING ER MODEL FOR THE Food Quality Monitoring in Restaurents
+ 
+1.1 Introduction
+In today’s highly competitive restaurant industry, maintaining food quality and customer satisfaction is essential for long-term success. Restaurants must continuously monitor food standards, hygiene, service quality, and customer experience to retain customers and enhance their reputation. Customer feedback plays a critical role in identifying areas of improvement and ensuring consistent quality.
+Traditional feedback systems often rely on manual records or unstructured digital reviews, making it difficult to analyze trends and take timely corrective action. These methods may lead to data redundancy, inconsistency, and inefficient tracking of complaints. To address these challenges, a structured database system is required.
+This project, Food Quality Monitoring in Restaurants (Customer Feedback Loop), focuses on designing a relational database system using DBMS principles to efficiently store, manage, and analyze customer feedback, orders, menu items, and quality-related data.
+1.2 Motivation
+The motivation for this project arises from the need for a centralized system that enables restaurants to systematically monitor food quality and customer satisfaction. As the number of customers and orders increases, managing feedback, complaints, payments, and ingredient tracking becomes complex without a structured database.
+Poor handling of customer feedback can result in unresolved complaints, reduced customer trust, and damage to the restaurant’s brand image. By implementing a database-driven system, restaurants can track feedback trends, monitor service performance, and improve decision-making.
+This project demonstrates how database concepts such as ER modeling, relational schema design, normalization, and integrity constraints can be applied to a real-world restaurant management scenario.
+1.3 Scope
+The scope of the Food Quality Monitoring System includes:
+● Management of users with different roles such as Admin, Manager, Staff, and Customer
+● Recording customer orders and order details
+● Maintaining menu items and pricing information
+● Managing ingredient and recipe details
+● Collecting and storing customer feedback and ratings
+● Logging and tracking complaints raised from feedback
+● Recording payment information
+● Monitoring food quality trends through stored feedback data
+The project primarily focuses on database design and implementation and does not include advanced front-end or user interface development.
+1.4 Problem Statement
+To design and implement a relational database system that efficiently manages restaurant operations by organizing user data, orders, menu items, ingredients, payments, feedback, and complaints while ensuring data integrity, consistency, reduced redundancy, and scalability through proper DBMS design principles.
+1.5 Project Requirements
+1.5.1 Functional Requirements
+● The system shall manage multiple users with different roles
+● The system shall allow customers to place orders
+● The system shall store order details including menu items and quantities
+● The system shall manage payment information
+● The system shall collect and store customer feedback and ratings
+● The system shall generate complaint logs based on negative feedback
+● The system shall manage ingredient and recipe information
+1.5.2 Non-Functional Requirements
+● The system shall ensure data integrity using primary and foreign keys
+● The system shall minimize data redundancy through normalization
+● The system shall provide efficient data retrieval using SQL queries
+● The system shall be scalable to handle increasing customer data
+● The system shall maintain consistency and accuracy of stored information
+1.6 Identification of Entities and Relationships
+Based on the problem analysis, the following entities were identified:
+● USER – Stores information about customers, staff, and administrators
+● DEPARTMENT – Stores department details within the restaurant
+● BRANCH – Stores information about restaurant branches
+● CUSTOMER_PROFILE – Stores additional customer-related information
+● ORDER – Represents customer orders
+● ORDER_DETAILS – Stores menu items included in each order (weak entity)
+● MENU_ITEM – Stores details of food items available
+● PAYMENT – Stores payment transaction details
+● FEEDBACK – Stores customer ratings and comments
+● COMPLAINT_LOG – Stores complaint information derived from feedback
+● INGREDIENT – Stores ingredient details
+● RECIPE – Stores relationship between menu items and ingredients
+Relationship Required 
+Entity 1
+ 
+Relation ship
+ 
+Entity 2
+ 
+Cardinality
+USERS
+belongs to
+DEPARTMENT
+N : 1
+BRANCH 
+employs 
+USERS 
+1 : N 
+USERS 
+creates 
+ORDERS
+1 : N 
+ORDERS
+contains  
+ORDER_DETAILS
+1 : N
+MENU_ITEMS  
+included in 
+ORDER_DETAILS
+ 1 : N
+ORDERS
+ 
+generates 
+PAYMENT  
+1 : 1 
+    USERS
+    gives  
+FEEDBACK
+1 : N 
+ORDERS
+has 
+FEEDBACK
+1 : 1 
+FEEDBACK
+triggers 
+COMPLAINT_LOG
+1 : 1 
+MENU_ITEMS
+has 
+RECIPE
+1 : 1
+RECIPE
+requires 
+INGREDIENTS
+N : 1
+BRANCH
+recieves
+FEEDBACKCUSTOMER_PROFILE
+1 : N 
+USERS
+has
+CUSTOMER_PROFILE
+1 : 1
+ 
+1.7 Construction of DB Using ER Model for the Food Quality Monitoring System
+The database for the Food Quality Monitoring in Restaurants (Customer Feedback Loop) system was constructed using the Entity-Relationship (ER) model as the conceptual foundation. The ER model provides a structured representation of the system, which was systematically transformed into a relational database schema.
+All major entities identified in the ER model, such as User, Department, Branch, Customer_Profile, Order, Menu_Item, Ingredient, Payment, Feedback, and Complaint_Log, were mapped to relational tables. The attributes of each entity were implemented as table columns, and primary keys were defined to uniquely identify each record in the database.
+Relationships between entities were implemented using foreign keys to maintain referential integrity. One-to-many relationships, such as User–Order and Order–Order_Details, were handled by placing foreign keys in the corresponding child tables. Many-to-many relationships, such as the relationship between Menu_Item and Ingredient, were resolved through the Recipe entity, which acts as an associative table. Weak entities like Order_Details were implemented with dependency on the Order entity to maintain relational consistency.
+Derived attributes such as order subtotal and total amount are computed dynamically based on item price and quantity to reduce data redundancy. The database schema was implemented using SQL Data Definition Language (DDL) commands, and referential integrity constraints were enforced through primary and foreign key relationships.
+This structured approach ensures data consistency, minimizes redundancy through normalization, and enables efficient data retrieval and analysis of customer feedback and food quality metrics.
+ 
+ 
+ 
+ 
+Figure 1.1: ER diagram of Food Quality Monitoring System
+ 
+ 
+ 
+ 
+Chapter 2 
+DESIGN OF RELATIONAL SCHEMAS, CREATION OF DATABASE AND TABLES FOR FOOD QUALITY MONITORING SYSTEM
+                   
+2.1 Relational Schema for Food Quality Monitoring System
+A relational schema represents the logical structure of the database derived from the Entity-Relationship (ER) diagram. It defines the relations (tables), attributes, primary keys, and foreign keys used to maintain relationships between tables. The relational schema is obtained by applying standard ER-to-relational mapping rules, where strong entities are converted into tables and relationships are implemented using foreign keys.
+The relational schema for the Food Quality Monitoring in Restaurants (Customer Feedback Loop) system includes tables for users, departments, branches, customer profiles, orders, order details, menu items, ingredients, recipes, payments, feedback, and complaint logs. Each table contains attributes that describe the entity, along with primary keys to uniquely identify records.
+One-to-many relationships such as User–Order and Order–Order_Details are implemented by placing foreign keys in the corresponding child tables. Many-to-many relationships, such as the relationship between Menu_Item and Ingredient, are resolved using the Recipe table as an associative entity. Weak entities like Order_Details are implemented with dependency on the Order table to maintain referential integrity.
+Primary and foreign key constraints are defined to ensure consistency, prevent data redundancy, and maintain integrity across the database. The relational schema forms the foundation for implementing the database using SQL and supports efficient querying, reporting, and analysis of food quality and customer feedback data.
+Figure 2.1: Relational Schema for Food Quality Monitoring in Restaurants (Customer Feedback Loop)
+Figure 2.1 depicts the relational schema of the Food Quality Monitoring System, showing all relations along with their attributes, primary keys, and foreign key dependencies. It illustrates how Orders act as the central entity connecting Users, Order_Details, Payments, Feedback, and Branches.
+The schema further demonstrates how Menu_Items are linked to Ingredients through the Recipe table, and how Feedback records are associated with Orders and may generate Complaint_Logs. Foreign key relationships ensure referential integrity between tables, while primary keys uniquely identify each record. Weak entities such as Order_Details are shown with their dependency on the Orders table.
+Overall, the relational schema provides a clear logical structure of the database, highlighting how customer interactions, food quality monitoring, and complaint management are integrated within a single structured system.
+. 
+ 
+2.2 Description of Tables
+Table 2.1: Department
+● Purpose: Stores information about different departments in the restaurant (e.g., Kitchen, Service, Management).
+● Primary Key: dept_id (INTEGER)
+● Data Types and Constraints:
+dept_id: INTEGER, Primary Key, Not Null, Auto Increment
+dept_name: VARCHAR(100), Not Null, Unique
+Table 2.2: Users
+● 
+Purpose: Stores information about system users including Admin, Manager, Staff, and Customer.
+● Primary Key: user_id (INTEGER)
+● Data Types and Constraints:
+user_id: INTEGER, Primary Key, Not Null, Auto Increment
+first_name: VARCHAR(50), Not Null
+last_name: VARCHAR(50), Not Null
+email: VARCHAR(100), Not Null, Unique
+phone_no: VARCHAR(20)
+user_role: ENUM('Admin','Manager','Staff','Customer'), Not Null
+dept_id: INTEGER, Foreign Key, References Department(dept_id)
+Table 2.3: Branch
+● 
+Purpose: Stores information about restaurant branches.
+● Primary Key: branch_id (INTEGER)
+● Data Types and Constraints:
+branch_id: INTEGER, Primary Key, Not Null, Auto Increment
+street_no: VARCHAR(20)
+address_line: VARCHAR(150), Not Null
+pincode: VARCHAR(10), Not Null
+phone_no: VARCHAR(20)
+Table 2.4: Customer_Profile
+● Purpose: Stores additional details of customers such as loyalty points and preferences.
+● Primary Key: profile_id (INTEGER)
+● Data Types and Constraints:
+profile_id: INTEGER, Primary Key, Not Null, Auto Increment
+user_id: INTEGER, Not Null, Unique, Foreign Key, References Users(user_id)
+loyalty_points: INTEGER, Default 0
+favorite_cuisine: VARCHAR(50)
+Table 2.5: Menu_Item
+● Purpose: Stores details of food items available in the restaurant.
+● Primary Key: item_id (INTEGER)
+● Data Types and Constraints:
+item_id: INTEGER, Primary Key, Not Null, Auto Increment
+item_name: VARCHAR(100), Not Null
+category: VARCHAR(50), Not Null
+price: DECIMAL(8,2), Not Null
+Table 2.6: Orders
+● 
+Purpose: Stores order details placed by customers and acts as the central entity of the system.
+● Primary Key: order_id (INTEGER)
+● Data Types and Constraints:
+order_id: INTEGER, Primary Key, Not Null, Auto Increment
+user_id: INTEGER, Not Null, Foreign Key, References Users(user_id)
+branch_id: INTEGER, Not Null, Foreign Key, References Branch(branch_id)
+order_timestamp: DATETIME, Not Null
+order_status: VARCHAR(30), Not Null
+Table 2.7: Order_Details
+● 
+Purpose: Stores details of menu items included in each order (Weak Entity).
+● Primary Key: Composite Key (order_id, item_id)
+● Data Types and Constraints:
+order_id: INTEGER, Not Null, Primary Key, Foreign Key, References Orders(order_id)
+item_id: INTEGER, Not Null, Primary Key, Foreign Key, References Menu_Item(item_id)
+quantity: INTEGER, Not Null
+subtotal: DECIMAL(8,2), Not Null
+Table 2.8: Payment
+● Purpose: Stores payment details for each order.
+● Primary Key: payment_id (INTEGER)
+● Data Types and Constraints:
+payment_id: INTEGER, Primary Key, Not Null, Auto Increment
+order_id: INTEGER, Not Null, Unique, Foreign Key, References Orders(order_id)
+amount: DECIMAL(10,2), Not Null
+payment_mode: ENUM('Cash','Card','UPI','Online'), Not Null
+payment_date: DATE, Not Null
+Table 2.9: Feedback
+● Purpose: Stores customer ratings and reviews for orders.
+● Primary Key: feedback_id (INTEGER)
+● Data Types and Constraints:
+feedback_id: INTEGER, Primary Key, Not Null, Auto Increment
+user_id: INTEGER, Not Null, Foreign Key, References Users(user_id)
+order_id: INTEGER, Not Null, Unique, Foreign Key, References Orders(order_id)
+rating_score: INTEGER, Not Null
+text_comments: VARCHAR(500)
+created_at: DATETIME, Not Null
+Table 2.10: Complaint_Log
+● 
+Purpose: Stores complaint records generated from negative feedback.
+● Primary Key: log_id (INTEGER)
+● Data Types and Constraints:
+log_id: INTEGER, Primary Key, Not Null, Auto Increment
+feedback_id: INTEGER, Not Null, Unique, Foreign Key, References Feedback(feedback_id)
+status: ENUM('Open','In Progress','Resolved'), Not Null
+resolution_notes: VARCHAR(500)
+Table 2.11: Ingredient
+● 
+Purpose: Stores information about ingredients used in food preparation.
+● Primary Key: ing_id (INTEGER)
+● Data Types and Constraints:
+ing_id: INTEGER, Primary Key, Not Null, Auto Increment
+ing_name: VARCHAR(100), Not Null
+stock_quantity: INTEGER, Not Null
+expiry_date: DATE
+Table 2.12: Recipe
+● 
+Purpose: Stores the relationship between menu items and ingredients required for preparation.
+● Primary Key: Composite Key (item_id, ing_id)
+● Data Types and Constraints:
+item_id: INTEGER, Not Null, Primary Key, Foreign Key, References Menu_Item(item_id)
+ing_id: INTEGER, Not Null, Primary Key, Foreign Key, References Ingredient(ing_id)
+quantity_required: DECIMAL(8,2), Not Null
+ 
+ 
+ 
+2.3 Creation of Database and Tables - DDL Commands  
+The database for the 
+Food Quality Monitoring System
+ is created using 
+MySQL Data Definition Language (DDL)
+ commands. DDL commands are used to define the structure of the database, including tables, attributes, primary keys, and foreign key constraints. These constraints ensure data integrity and enforce relationships among tables. 
+Database Creation
+ 
+CREATE DATABASE IF NOT EXISTS Food_Quality_DB;
+USE Food_Quality_DB;
+-- Disable checks to allow dropping tables with dependencies
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS Complaint_Log;
+DROP TABLE IF EXISTS Feedback;
+DROP TABLE IF EXISTS Payment;
+DROP TABLE IF EXISTS Order_Details;
+DROP TABLE IF EXISTS `Order`;
+DROP TABLE IF EXISTS Recipe;
+DROP TABLE IF EXISTS Customer_Profile;
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Menu_Item;
+DROP TABLE IF EXISTS Ingredient;
+DROP TABLE IF EXISTS Branch;
+DROP TABLE IF EXISTS Department;
+-- 1. DEPARTMENT [cite: 1167]
+CREATE TABLE Department (
+    Dept_ID INT PRIMARY KEY,
+    Dept_Name VARCHAR(50) NOT NULL
+);
+-- 2. BRANCH [cite: 1173]
+CREATE TABLE Branch (
+    Branch_ID INT PRIMARY KEY,
+    Phone_No VARCHAR(15),
+    Street_No VARCHAR(20),
+    Pin_Code VARCHAR(10),
+    Address_Line VARCHAR(255)
+);
+-- 3. INGREDIENT [cite: 1181]
+CREATE TABLE Ingredient (
+    Ing_ID INT PRIMARY KEY,
+    Ing_Name VARCHAR(100) NOT NULL,
+    Stock_Quantity DECIMAL(10, 2) DEFAULT 0.00,
+    Expiry_Date DATE
+);
+-- 4. MENU_ITEM [cite: 1187]
+CREATE TABLE Menu_Item (
+    Item_ID INT PRIMARY KEY,
+    Item_Name VARCHAR(100) NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+    Category VARCHAR(50)
+);
+-- 5. USER [cite: 1196]
+CREATE TABLE User (
+    User_ID INT PRIMARY KEY,
+    First_Name VARCHAR(50) NOT NULL,
+    Last_Name VARCHAR(50),
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    Phone_No VARCHAR(15),
+    User_Role VARCHAR(20) CHECK (User_Role IN ('Staff', 'Manager', 'Customer', 'Admin')),
+    Branch_ID INT,
+    Dept_ID INT,
+    FOREIGN KEY (Branch_ID) REFERENCES Branch(Branch_ID),
+    FOREIGN KEY (Dept_ID) REFERENCES Department(Dept_ID)
+);
+-- 6. ORDER [cite: 1229]
+CREATE TABLE `Order` (
+    Order_ID INT PRIMARY KEY,
+    Order_Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    User_ID INT NOT NULL,
+    Branch_ID INT NOT NULL,
+    FOREIGN KEY (User_ID) REFERENCES User(User_ID),
+    FOREIGN KEY (Branch_ID) REFERENCES Branch(Branch_ID)
+);
+-- 7. FEEDBACK [cite: 1257]
+CREATE TABLE Feedback (
+    Feedback_ID INT PRIMARY KEY,
+    Rating_Score INT CHECK (Rating_Score BETWEEN 1 AND 5),
+    Text_Comments TEXT,
+    User_ID INT,
+    Branch_ID INT,
+    Item_ID INT NOT NULL,
+    FOREIGN KEY (User_ID) REFERENCES User(User_ID),
+    FOREIGN KEY (Branch_ID) REFERENCES Branch(Branch_ID),
+    FOREIGN KEY (Item_ID) REFERENCES Menu_Item(Item_ID)
+);
+-- 8. COMPLAINT_LOG [cite: 1271]
+CREATE TABLE Complaint_Log (
+    Log_ID INT PRIMARY KEY,
+    Status VARCHAR(20) DEFAULT 'Open',
+    Resolution_Notes TEXT,
+    Feedback_ID INT NOT NULL UNIQUE,
+    FOREIGN KEY (Feedback_ID) REFERENCES Feedback(Feedback_ID) ON DELETE CASCADE
+);
+SET FOREIGN_KEY_CHECKS = 1;
+ 
+2.4 Insertion of tuples into the table – DML commands 
+After creating the database and tables, sample records are inserted using 
+Data Manipulation Language (DML)
+ commands. These records validate the correctness of table relationships and constraints. 
+   PROJECT: RESTAURANT MANAGEMENT SYSTEM
+   DML INSERTS (DUMMY DATA)
+   
+USE Food_Quality_DB;
+-- 1. Populating Departments
+INSERT INTO Department VALUES (1, 'Kitchen'), (2, 'Service'), (3, 'Management');
+-- 2. Populating Branch Details
+INSERT INTO Branch VALUES (101, '9876543210', 'No. 12', '600001', 'Chennai-Main');
+-- 3. Populating Menu Items
+INSERT INTO Menu_Item VALUES (1, 'Classic Burger', 250.00, 'Main Course'), (2, 'Cheese Fries', 120.00, 'Starter');
+-- 4. Populating Users (Including Admin Profile)
+INSERT INTO User VALUES (1001, 'Karur', 'Nikhil', 'karurnikhil@mail.com', '9030620314', 'Admin', 101, 3);
+INSERT INTO User VALUES (1002, 'Rahul', 'Verma', 'rahul@gmail.com', '9000033333', 'Customer', 101, NULL);
+-- 5. Recording Initial Transactions
+INSERT INTO `Order` (Order_ID, User_ID, Branch_ID) VALUES (5001, 1002, 101);
+-- 6. Recording Initial Feedback
+INSERT INTO Feedback (Feedback_ID, Rating_Score, Text_Comments, User_ID, Branch_ID, Item_ID) 
+VALUES (1, 2, 'Fries were salty', 1002, 101, 2);
+country_id 
+country_name 
+iso_code 
+1 
+India 
+IN 
+2 
+United States 
+US 
+3 
+Germany 
+DE 
+USERS TABLE 
+ 
+user_i d
+ 
+usernam
+e
+ 
+role
+ 
+phone_numbe r
+ 
+city
+ 
+state
+ 
+country_id
+ 
+1 
+exporter1 
+Exporte
+r 
+9876543210 
+Chennai 
+Tamil 
+Nadu 
+1 
+2 
+importer1 
+Importe
+r 
+9123456780 
+New 
+York 
+New York 
+2 
+3 
+agent1 
+Agent 
+9988776655 
+Chennai 
+Tamil 
+Nadu 
+1 
+4 
+admin1 
+Admin 
+9000011111 
+Chennai 
+Tamil 
+Nadu 
+1 
+PORTS
+ 
+TABLE
+ 
+ 
+port_id
+ 
+port_name
+ 
+transport_type
+ 
+country_id
+ 
+1 
+Chennai Port 
+Sea 
+1 
+2 
+Mumbai 
+Airport 
+Air 
+1 
+3 
+Hamburg Port 
+Sea 
+3 
+PRODUCTS
+ 
+TABLE
+ 
+ 
+product_id
+ 
+product_name
+ 
+category
+ 
+1 
+Laptop 
+Electronic s 
+2 
+Automobile 
+Parts 
+Automobil e 
+HS_CODES
+ 
+TABLE
+ 
+ 
+hs_cod e
+ 
+description
+ 
+duty_rate
+ 
+847130 
+Portable 
+Computers 
+18.00 
+870899 
+Vehicle Parts 
+12.50 
+ 
+ 
+ 
+ 
+SHIPMENTS
+ 
+TABLE
+ 
+ 
+shipme nt_id
+ 
+shipment
+_date
+ 
+stat us
+ 
+transport_ mode
+ 
+export er_id
+ 
+importe r_id
+ 
+origin_po rt_id
+ 
+destination_ port_id
+ 
+1 
+2026-03-
+10 
+In Tra
+nsit 
+Ship 
+1 
+2 
+1 
+3 
+SHIPMENT_ITEMS
+ 
+TABLE
+ 
+ 
+shipment_i d
+ 
+product_id
+ 
+hs_cod e
+ 
+quantity
+ 
+declared_valu e
+ 
+1 
+1 
+847130 
+10 
+500000 
+1 
+2 
+870899 
+5 
+250000 
+SHIPMENT_HISTORY
+ 
+TABLE
+ 
+ 
+history_id
+ 
+shipment_i d
+ 
+status
+ 
+updated_at
+ 
+1 
+1 
+Created 
+2026-03-10 
+09:00 
+2 
+1 
+In 
+Transit 
+2026-03-11 
+14:30 
+ 
+ 
+ 
+ 
+ 
+DOCUMENTS
+ 
+TABLE
+ 
+ 
+document_
+id
+ 
+document_na me
+ 
+document_ty pe
+ 
+upload_da
+te
+ 
+shipment_
+id
+ 
+uploaded_ by
+ 
+1 
+Invoice_001 
+Invoice 
+2026-03-1
+1 
+1 
+1 
+2 
+BillOfLading_0
+01 
+Bill of Lading 
+2026-03-1
+1 
+1 
+3 
+ 
+CHAPTER 3 
+                       Complex queries based on the concepts of 
+              constraints, sets, joins, views, Triggers and Cursors. 
+3.1 Adding Constraints and queries based on constraints 
+Question 1: How does the system use Primary Keys (PK) and Foreign Keys (FK) to link 
+feedback entries to specific menu items in the global catalog? SQL Statement: 
+SQL 
+SELECT  
+f.Feedback_ID,  
+m.Item_Name,  
+f.Rating_Score  
+FROM Feedback f  
+INNER JOIN Menu_Item m ON f.Item_ID = m.Item_ID; 
+Output:
+Question 2: How can we verify the UNIQUE constraint on user profiles to prevent 
+duplicate email registrations? SQL Statement: 
+SELECT  
+First_Name,  
+Email  
+FROM User;
+ 
+Output:
+Question 3: How does the system perform a "CHECK" on data values to ensure only valid 
+user roles are used? SQL Statement: 
+SQL 
+SELECT  
+User_ID,  
+User_Role,  
+First_Name  
+FROM User  
+WHERE User_Role IN ('Staff', 'Manager', 'Customer', 'Admin');
+ 
+Output:
+3.2 Queries based on Aggregate Functions 
+Question 1: What is the total volume of feedback entries and the cumulative price value 
+currently handled by the system? SQL Statement: 
+SQL 
+SELECT  
+COUNT(*) AS total_feedback,  
+SUM(Price) AS total_menu_value  
+FROM Feedback, Menu_Item; 
+Output:
+Question 2: Which values represent the average, minimum, and maximum rating scores in 
+our database? SQL Statement: 
+SQL 
+SELECT  
+AVG(Rating_Score) AS avg_rating,  
+MIN(Rating_Score) AS min_rating,  
+MAX(Rating_Score) AS max_rating  
+FROM Feedback; 
+Output:
+Question 3: What are the variance and standard deviation of the menu prices in the 
+system? SQL Statement: 
+SQL 
+SELECT  
+VARIANCE(Price) AS price_variance,  
+STDDEV(Price) AS price_stddev  
+FROM Menu_Item; 
+Output:
+Question 4: How many users are registered from each branch, and which branches have 
+more than 5 registered users? SQL Statement: 
+SQL 
+SELECT Branch_ID, COUNT(User_ID) AS total_users  
+FROM User  
+GROUP BY Branch_ID  
+HAVING COUNT(User_ID) > 5; 
+Output:
+3.3 Complex queries based on Sets 
+Question 1: Who are the unique individuals acting as either Staff or Managers in the 
+quality monitoring system? SQL Statement: 
+SQL 
+SELECT First_Name FROM User WHERE User_Role = 'Staff'  
+UNION  
+SELECT First_Name FROM User WHERE User_Role = 'Manager'; 
+Output:
+Question 2: Which branches are currently integrated into our active monitoring network? 
+SQL Statement: 
+SQL 
+SELECT DISTINCT b.Branch_ID, b.Address_Line  
+FROM Branch b  
+INNER JOIN User u ON b.Branch_ID = u.Branch_ID; 
+Output: 
+Question 3: Which registered departments do not have any associated staff members in 
+our system? SQL Statement: 
+SQL 
+SELECT Dept_ID, Dept_Name  
+FROM Department d  
+WHERE NOT EXISTS ( 
+SELECT 1 FROM User u WHERE u.Dept_ID = d.Dept_ID 
+);
+ 
+Output:
+3.4 Complex queries based on Subqueries 
+Question 1: Which menu items in our master catalog are currently associated with 
+Customer feedback? SQL Statement: 
+SQL 
+SELECT Item_Name  
+FROM Menu_Item  
+WHERE Item_ID IN ( 
+SELECT Item_ID FROM Feedback 
+);
+ 
+Output:
+Question 2: Which orders have officially received feedback and are ready for quality 
+audit? SQL Statement: 
+SQL 
+SELECT Order_ID, Order_Time  
+FROM `Order`  
+WHERE Order_ID IN ( 
+SELECT Order_ID FROM Feedback 
+); 
+Output:
+Question 3: Which specific menu items are priced higher than the overall average price 
+of all items in the system? SQL Statement: 
+SQL 
+SELECT Item_ID, Item_Name, Price  
+FROM Menu_Item  
+WHERE Price > ( 
+SELECT AVG(Price) FROM Menu_Item 
+); 
+Output:
+3.5 Complex queries based on Joins 
+Question 1: Which customers are placing orders at which branches, and what are the 
+respective branch addresses? SQL Statement: 
+SQL 
+SELECT  
+o.Order_ID,  
+u.First_Name AS Customer,  
+b.Address_Line AS Branch_Location  
+FROM `Order` o  
+JOIN User u ON o.User_ID = u.User_ID  
+JOIN Branch b ON o.Branch_ID = b.Branch_ID; 
+Output:
+Question 2: What is the current status of every complaint linked to feedback in the 
+system? SQL Statement: 
+SQL 
+SELECT  
+f.Feedback_ID,  
+f.Rating_Score,  
+c.Status  
+FROM Feedback f  
+RIGHT JOIN Complaint_Log c ON f.Feedback_ID = c.Feedback_ID; 
+Output:
+Question 3: Which combinations of Menu Items and Branches are possible within our 
+service network? SQL Statement: 
+SQL 
+SELECT  
+m.Item_Name,  
+b.Address_Line  
+FROM Menu_Item m  
+CROSS JOIN Branch b; 
+Output:
+3.6 Complex queries based on Views 
+Question 1: How can we create a view that displays each branch alongside the total 
+number of feedback activities they have received? SQL Statement: 
+SQL 
+CREATE VIEW branch_activity_view AS  
+SELECT  
+b.Branch_ID,  
+b.Address_Line,  
+u.First_Name AS reporter_name  
+FROM Branch b  
+JOIN User u ON b.Branch_ID = u.Branch_ID; -- SELECT FROM VIEW 
+SELECT * FROM branch_activity_view;
+ 
+Output: 
+Question 2: Which virtual table can be designed to automatically exclude "Admin" or 
+"Manager" actions, providing a dashboard of customer interactions? SQL Statement: 
+SQL 
+CREATE VIEW customer_interactions_view AS  
+SELECT  
+User_ID,  
+First_Name,  
+User_Role  
+FROM User  
+WHERE User_Role = 'Customer'; -- Executing the filtered view 
+SELECT * FROM customer_interactions_view; 
+Output:
+Question 3: What is the correct procedure to remove a view from the database schema 
+when it is no longer required for reporting? SQL Statement: 
+SQL 
+DROP VIEW IF EXISTS branch_activity_view; 
+Output:
+3.7 Complex queries based on Triggers 
+Question 1: How can we ensure that menu item categories are always stored in 
+uppercase for consistent reporting? SQL Statement: 
+SQL 
+DELIMITER $$  
+CREATE TRIGGER force_uppercase_category  
+BEFORE INSERT ON Menu_Item  
+FOR EACH ROW  
+BEGIN  
+SET NEW.Category = UPPER(NEW.Category);  
+END$$  
+DELIMITER ; 
+Output: 
+Question 2: Which safety mechanism can prevent the deletion of "Admin" users to 
+preserve system integrity? SQL Statement: 
+SQL 
+DELIMITER $$  
+CREATE TRIGGER protect_admin_users  
+BEFORE DELETE ON User  
+FOR EACH ROW  
+BEGIN  
+IF OLD.User_Role = 'Admin' THEN  
+SIGNAL SQLSTATE '45000'  
+SET MESSAGE_TEXT = 'Cannot delete an Admin user.';  
+END IF;  
+END$$  
+DELIMITER ; 
+Output:
+Question 3: How can we automatically update the creation date of a feedback entry to 
+the current date if it is left blank? SQL Statement: 
+SQL -- Assuming a column 'Created_At' exists in your Feedback table 
+DELIMITER $$  
+CREATE TRIGGER set_feedback_date  
+BEFORE INSERT ON Feedback  
+FOR EACH ROW  
+BEGIN  
+IF NEW.Created_At IS NULL THEN  
+SET NEW.Created_At = CURRENT_DATE;  
+END IF;  
+END$$  
+DELIMITER ; 
+Output:
+3.8 Complex queries based on Cursors 
+Question 1: How can we use a cursor to programmatically list every Menu Item ID 
+registered in our database? SQL Statement: 
+SQL 
+DELIMITER $$  
+CREATE PROCEDURE show_menu_items()  
+BEGIN  
+DECLARE done INT DEFAULT 0;  
+DECLARE m_id INT;  
+DECLARE cur CURSOR FOR SELECT Item_ID FROM Menu_Item;  
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;  
+OPEN cur;  
+read_loop: LOOP  
+FETCH cur INTO m_id;  
+IF done THEN LEAVE read_loop; END IF;  
+SELECT m_id AS Item_ID;  
+END LOOP;  
+CLOSE cur;  
+END$$  
+DELIMITER ;  
+CALL show_menu_items(); 
+Output:
+Question 2: Which feedback entries are currently "Pending Review" according to a 
+row-by-row cursor evaluation? SQL Statement: 
+SQL -- Assuming a status column exists in Complaint_Log 
+DELIMITER $$  
+CREATE PROCEDURE show_pending_complaints()  
+BEGIN  
+DECLARE done INT DEFAULT 0;  
+DECLARE c_id INT;  
+DECLARE c_status VARCHAR(20);  
+DECLARE cur CURSOR FOR SELECT Log_ID, Status FROM Complaint_Log;  
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;  
+OPEN cur;  
+read_loop: LOOP  
+FETCH cur INTO c_id, c_status;  
+IF done THEN LEAVE read_loop; END IF;  
+IF c_status = 'Open' THEN  
+SELECT c_id AS Log_ID, c_status AS Status;  
+END IF;  
+END LOOP;  
+CLOSE cur;  
+END$$  
+DELIMITER ;  
+CALL show_pending_complaints(); 
+Output: 
+Question 3: How can we use a cursor to calculate a 10% quality tax on menu items using a 
+stored function? SQL Statement: 
+SQL 
+DELIMITER $$  
+CREATE FUNCTION apply_quality_tax(amount DECIMAL(10,2))   
+RETURNS DECIMAL(10,2) DETERMINISTIC  
+BEGIN  
+RETURN amount * 1.10;  
+END$$  
+CREATE PROCEDURE total_taxed_value()  
+BEGIN  
+DECLARE done INT DEFAULT 0;  
+DECLARE val DECIMAL(10,2);  
+DECLARE total DECIMAL(15,2) DEFAULT 0;  
+DECLARE cur CURSOR FOR SELECT Price FROM Menu_Item;  
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;  
+OPEN cur;  
+read_loop: LOOP  
+FETCH cur INTO val;  
+IF done THEN LEAVE read_loop; END IF;  
+SET total = total + apply_quality_tax(val);  
+END LOOP;  
+CLOSE cur;  
+SELECT total AS total_value_with_tax;  
+END$$  
+DELIMITER ;  
+CALL total_taxed_value(); 
+Output:
+CHAPTER 4
+ANALYZING THE PITFALLS, IDENTIFYING THE DEPENDENCIES, AND APPLYING NORMALIZATIONS
+4.1 Analysing Pitfalls, Identifying Dependencies and Applying Normalization (1NF, 2NF, 3NF)
+Introduction
+In database design, improper structuring of data can lead to various issues such as redundancy, inconsistency, and anomalies during insertion, deletion, and updating of records. To overcome these problems, normalization is applied. Normalization organizes data into well-structured tables by eliminating redundancy and ensuring data integrity.
+The Food Quality Monitoring System database was analyzed for possible pitfalls and normalized up to Third Normal Form (3NF).
+4.1.1 Identifying Pitfalls
+The following potential issues were identified in the initial database design:
+Data Redundancy
+Repeated storage of customer details, menu items, and ingredient information across multiple tables can increase storage and lead to inconsistencies. 
+Update Anomalies
+Updating a menu item price in multiple places may cause mismatched values. 
+Insertion Anomalies
+Inability to insert data without complete information (e.g., cannot add feedback without an order). 
+Deletion Anomalies
+Deleting an order may lead to loss of related feedback or payment details.
+4.1.2 Functional Dependencies
+Functional dependencies define relationships between attributes:
+User Table
+User_ID → First_Name, Last_Name, Email, Phone_No, User_Role 
+Order Table
+Order_ID → User_ID, Branch_ID, Order_Time 
+Menu_Item Table
+Item_ID → Item_Name, Price, Category 
+Order_Details Table
+(Order_ID, Item_ID) → Quantity, Subtotal 
+Feedback Table
+Feedback_ID → Rating_Score, Text_Comments, User_ID, Order_ID 
+Complaint_Log Table
+Log_ID → Feedback_ID, Status, Resolution_Notes 
+4.2 First Normal Form (1NF)
+First Normal Form ensures that:
+● All attributes contain atomic values
+● There are no repeating groups
+● Each record is uniquely identifiable
+Orders Table (Not in 1NF)
+4.2.1 Identify Dependency
+In the unnormalized relation, the functional dependency is:
+Order_ID → User_ID, Branch_ID, Order_Time, Items
+Here, the attribute 
+Items
+ may contain multiple values, which violates atomicity.
+Each order is associated with multiple menu items, but storing them in a single column leads to improper dependency representation.
+4.2.2 Apply Normalization to 1NF
+To convert the table into First Normal Form:
+● Multi-valued attributes (menu items) are separated
+● Each menu item is stored in a separate row
+● A new table 
+Order_Details
+ is created
+● A composite primary key (Order_ID, Item_ID) is introduced
+Converted to 1NF
+4.3 Second Normal Form (2NF)
+Second Normal Form ensures that:
+● 
+The table is in 1NF
+● There are no partial dependencies
+● All non-key attributes depend on the full primary key
+Order_Details Table (Not in 2NF)
+4.3.1 Identify Dependency
+Functional dependencies:
+(Order_ID, Item_ID) → Quantity, price
+Item_ID → Item_Name, Price
+Here, 
+Item_Name
+ and 
+Price
+ depend only on Item_ID, not on the full composite key.
+This creates a partial dependency, violating 2NF.
+4.3.2 Apply Normalization to 2NF
+To remove partial dependency:
+● Separate menu item details into a new table
+● Keep only fully dependent attributes in Order_Details
+Converted to 2NF
+4.4 Third Normal Form (3NF)
+Third Normal Form ensures that:
+● The table is in 2NF
+● There are no transitive dependencies
+Users Table (Not in 3NF)
+4.4.1 Identify Dependency
+Functional dependencies:
+User_ID → Dept_ID
+Dept_ID → Dept_Name
+This creates a transitive dependency:
+User_ID → Dept_Name (indirectly)
+4.4.2 Apply Normalization to 3NF
+To remove transitive dependency:
+● Separate department details into a new table
+● Keep only foreign key in Users table
+Converted to 3NF
+4.5 Boyce-Codd Normal Form (BCNF)
+Boyce-Codd Normal Form ensures that:
+● The table is in 3NF
+● For every functional dependency, the determinant must be a key attribute
+● There are no anomalies due to non-key determinants
+Feedback Table before  (Not in BCNF)
+4.5.1 Identify Dependency
+Functional dependencies in the Feedback table:
+Feedback_ID  →User_ID, Order_ID, Rating_Score, Comments
+Order_ID → User_ID
+Why it violates BCNF:
+Here, 
+Order_ID
+ determines 
+User_ID
+ (because an order strictly belongs to one user). But 
+Order_ID
+ is NOT a candidate key for the Feedback table. This violates BCNF because a non-key attribute is acting as a determinant.
+4.5.2 Apply Normalization to BCNF
+To convert into BCNF:
+Remove the dependency where a non-key determines another attribute.
+Separate 
+User_ID
+ out of the Feedback table.
+Relocate 
+User_ID
+ to the 
+Orders
+ table where 
+Order_ID
+ is properly a Candidate/Primary Key
+.
+Converted to BCNF
+4.5 Fourth Normal Form (4NF)
+Fourth Normal Form ensures that:
+● The table is in 3NF
+● There are no multi-valued dependencies
+● Independent multi-valued attributes are separated
+Menu_Item Table (Not in 4NF)
+4.5.1 Identify Dependency
+Functional Dependencies:
+Item_ID - ->Ingredient
+Item_ID - - > Supplier
+This indicates that:
+One menu item has multiple ingredients.
+One menu item can be sourced from multiple independent suppliers.
+Ingredients and Suppliers are completely independent of each other.
+Why it violates 4NF:
+Because they are independent, storing them in the same table forces the database to create redundant, repetitive combinations of every ingredient matched with every supplier for a single item. This violates 4NF due to independent multi-valued dependencies.
+Converted to 4NF
+4.6 Fifth Normal Form (5NF)
+Fifth Normal Form ensures that:
+● The table is in 4NF
+● There are no join dependencies
+● Data can be reconstructed without redundancy
+Order System Tables (Not in 5NF)
+4.6.1 Identify Dependency
+Join dependency exists between: Branch_ID, Item_ID, Supplier_ID
+This means:
+A specific Branch requires a specific Item.
+A specific Item is provided by a specific Supplier.
+A specific Supplier delivers to a specific Branch.
+Why it violates 5NF: Combining all three into one mega-table creates massive redundancy. However, splitting them into only two tables causes a loss of data regarding who delivers what to where. This represents a cyclic dependency where the information can only be reconstructed accurately by joining three separate relationships.
+4.6.2 Apply Normalization to 5NF
+To remove the cyclic join dependency:
+Decompose the 3-way relationship into three separate 2-way tables:
+Branch_Item (Which branch needs which item)
+Item_Supplier (Which supplier provides which item)
+Supplier_Branch (Which supplier serves which branch)
+Maintain the relationships losslessly without redundancy.
+Converted to 5NF
+CHAPTER 5
+IMPLEMENTATION OF CONCURRENCY CONTROL AND RECOVERY MECHANISMS
+5.1 Introduction to Transactions
+A transaction is a sequence of SQL operations executed as a single logical unit of work. In the Food Quality Monitoring System, transactions ensure that database operations such as placing orders, updating menu items, processing payments, and recording customer feedback are performed reliably and consistently.
+5.1.1 Properties of Transactions (ACID)
+Atomicity → All operations are completed or none
+Consistency → Database remains in a valid state
+Isolation → Transactions do not interfere with each other
+Durability → Changes are permanent after commit
+5.1.2 States of Transaction
+Active → Transaction is executing
+Partially Committed → Last statement executed
+Committed → Successfully completed
+Failed → Error occurred
+Aborted → Rolled back
+5.2 Transaction Control Language (TCL)
+5.2.1 SAVEPOINT
+A savepoint is used to mark a point within a transaction to which we can later roll back.
+5.2.2 COMMIT
+Commit permanently saves all changes made during the transaction.
+5.2.3 ROLLBACK
+Rollback is used to undo changes made during the transaction.
+5.3 Transactions Implementation
+5.3.1 Transaction 1 – Order Creation
+START TRANSACTION;
+INSERT INTO Orders (order_id, user_id, branch_id, order_status) 
+VALUES (701, 3, 1, 'Pending');
+SAVEPOINT sp1;
+INSERT INTO Order_Details (order_id, item_id, quantity, subtotal) 
+VALUES (701, 1, 1, 250.00); 
+ROLLBACK TO sp1;
+COMMIT;
+SELECT * FROM Orders WHERE order_id = 701;
+5.3.2 Transaction 2 – Menu Item Price Update
+START TRANSACTION;
+UPDATE Menu_Item 
+SET price = 295.00 
+WHERE item_id = 1;
+SAVEPOINT sp2;
+UPDATE Menu_Item 
+SET price = 5000.00 
+WHERE item_id = 1; 
+ROLLBACK TO sp2; 
+COMMIT;
+5.3.3 Transaction 3 – Ingredient Stock Update
+START TRANSACTION;
+UPDATE Ingredient 
+SET stock_quantity = stock_quantity - 2 
+WHERE ing_id = 1;
+SAVEPOINT sp3;
+UPDATE Ingredient 
+SET stock_quantity = stock_quantity - 500 
+WHERE ing_id = 1; 
+ROLLBACK TO sp3;
+COMMIT;
+5.3.4 Transaction 4 – User Role Update
+START TRANSACTION;
+UPDATE Users 
+SET user_role = 'Staff' 
+WHERE user_id = 1;
+SAVEPOINT sp4;
+UPDATE Users 
+SET user_role = 'Admin' 
+WHERE user_id = 1;
+ROLLBACK TO sp4;
+COMMIT;
+5.3.5 Transaction 5 – Order Status Update
+START TRANSACTION;
+UPDATE Orders 
+SET order_status = 'Preparing' 
+WHERE order_id = 101;
+SAVEPOINT sp5;
+UPDATE Orders 
+SET order_status = 'Cancelled' 
+WHERE order_id = 101;
+ROLLBACK TO sp5;
+COMMIT;
+5.4 Concurrency Control
+Concurrency control ensures that multiple transactions execute safely without data inconsistency.
+5.4.1 Row-Level Locking – SELECT ... FOR UPDATE
+USE food_quality_db;
+START TRANSACTION;
+SELECT * FROM Orders 
+WHERE order_id = 101 
+FOR UPDATE;
+UPDATE Orders 
+SET order_status = 'In Transit' 
+WHERE order_id = 101;
+COMMIT;
+5.4.2 Concurrency Control – Shared Lock (Write Conflict)
+While 
+Transaction A
+ (the Cashier) holds a Shared Lock to ensure the price remains stable during billing, any attempt by another transaction to modify that specific data will be forced to wait.
+Transaction B (Manager Terminal - Attempting a Price Update)
+Action:
+ The Manager tries to update the price of the "Classic Burger" to reflect a new promotion.
+SQL Command:
+ 
+START TRANSACTION; 
+-- The manager attempts to change the price of the "Classic Burger"
+UPDATE Menu_Item 
+SET price = 12.50 
+WHERE item_id = 1;
+-- STATUS: WAITING... 
+Status:
+ 
+Blocked / Waiting
+Reasoning:
+ Because Transaction A has an active 
+Shared Lock (FOR SHARE)
+, the database management system (DBMS) recognizes that the data is currently being relied upon for accuracy. A "Write" operation requires an 
+Exclusive Lock
+, which cannot be granted until all "Shared Locks" on that row are released.
+Transaction B
+ represents the Manager attempting to modify the burger's price while the Cashier's bill is still being processed.
+START TRANSACTION;
+-- The manager attempts to increase the price of the "Classic Burger"
+UPDATE Menu_Item 
+SET price = 12.50 
+WHERE item_id = 1;
+-- STATUS: [WAITING / BLOCKED]
+-- (This query will not execute yet; it hangs while waiting for Transaction A to finish)
+5.4.3 Table-Level Locking – LOCK TABLE
+LOCK TABLES Menu_Item WRITE;
+UPDATE Menu_Item 
+SET price = price + 2.00;
+UNLOCK TABLES;
+Lock Modes
+Lock Mode
+Description
+ROW SHARE
+Allows concurrent access; prevents other sessions from locking the table exclusively
+ROW EXCLUSIVE
+Prevents other sessions from locking in share mode; used by default for DML operations
+SHARE
+Allows reading but restricts updates and deletes
+SHARE ROW EXCLUSIVE
+More restrictive than SHARE; prevents most concurrent modifications
+EXCLUSIVE
+Prevents all other access; full table lock
+5.4.3 COMMIT – Permanent Save
+COMMIT;
+Result:
+Changes are permanently saved and all locks are released.
+5.4.4 ROLLBACK – Undo Changes (Recovery Mechanism)
+START TRANSACTION;
+UPDATE Users 
+SET user_role = 'Staff' 
+WHERE user_id = 3;
+SELECT * FROM Users WHERE user_id = 3;
+ROLLBACK;
+SELECT * FROM Users WHERE user_id = 3;
+START TRANSACTION;
+UPDATE Users 
+SET user_role = 'Admin' 
+WHERE user_id = 1;
+COMMIT;

@@ -1,0 +1,12 @@
+{
+  "user": { "userId": 1002 },
+  "branch": { "branchId": 101 },
+  "orderStatus": "COMPLETED",
+  "orderDetails": [
+    {
+      "menuItem": { "itemId": 1 },
+      "quantity": 1,
+      "subtotal": 250.00
+    }
+  ]
+}
